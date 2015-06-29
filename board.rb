@@ -202,8 +202,11 @@ class Board
 
   def render
     # p grid[7][4].moves
+
+    i = 8
     @grid.each do |row|
-      stringed_row = ""
+      stringed_row = "#{i} "
+      i -= 1
       row.each do |item|
         if item
           stringed_row += " #{item.render} "
@@ -213,7 +216,7 @@ class Board
       end
       puts stringed_row
     end
-
+        puts "   A  B  C  D  E  F  G  H"
     return nil
   end
 
