@@ -1,17 +1,19 @@
 require_relative 'piece'
-# require_relative 'knight'
+require_relative 'knight'
 require_relative 'stepping_piece'
 require_relative 'pawn'
-# require_relative 'king'
+require_relative 'king'
 require_relative 'sliding_piece'
 require_relative 'rook'
 require_relative 'bishop'
 require_relative 'queen'
 
 class Board
+  attr_reader :grid
 
   def initialize
-    @grid = Board.setup_grid
+    @grid = setup_grid
+
     # @pawn = Pawn.new([0, 0])
     # add_piece(@pawn)
   # p  @pawn.moves
@@ -31,23 +33,30 @@ class Board
     # updates the 2d grid and also the moved piece's position. You'll want to raise an exception if: (a) there is no piece at start or (b) the piece cannot move to end_pos.
   end
 
-  def self.setup_grid
+  def setup_grid
+
     grid = Array.new(8) { Array.new(8) }
 
 
     grid[0][0] = Rook.new(self, [0, 0], "black")
-    grid[0][7] = Rook.new(self, [0, 7], "black")
+    grid[0][1] = Knight.new(self, [0, 1], "black")
     grid[0][2] = Bishop.new(self, [0, 2], "black")
-    grid[0][5] = Bishop.new(self, [0, 5], "black")
     grid[0][3] = Queen.new(self, [0, 3], "black")
-
+    grid[0][4] = King.new(self, [0, 4], "black")
+    grid[0][5] = Bishop.new(self, [0, 5], "black")
+    grid[0][6] = Knight.new(self, [0, 6], "black")
+    grid[0][7] = Rook.new(self, [0, 7], "black")
 
 
     grid[7][0] = Rook.new(self, [7, 0], "white")
-    grid[7][7] = Rook.new(self, [7, 7], "white")
+    grid[7][1] = Knight.new(self, [7, 1], "white")
     grid[7][2] = Bishop.new(self, [7, 2], "white")
-    grid[7][5] = Bishop.new(self, [7, 5], "white")
     grid[7][3] = Queen.new(self, [7, 3], "white")
+    grid[7][4] = King.new(self, [7, 4], "white")
+    grid[7][5] = Bishop.new(self, [7, 5], "white")
+    grid[7][6] = Knight.new(self, [7, 6], "white")
+    grid[7][7] = Rook.new(self, [7, 7], "white")
+
 
 
     # pawn_rows = [1, 6]
@@ -73,9 +82,10 @@ class Board
   end
 
   def render
-    @grid.each do |row|
-      p row
-    end
+    p grid[0][3].moves
+    # @grid.each do |row|
+    #   p row
+    # end
   end
 
   def test
