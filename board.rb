@@ -99,13 +99,20 @@ class Board
 
     # starting_piece.valid_moves
 
+    p starting_piece
+    p starting_piece.moves
     if starting_piece.nil?
       raise ArgumentError, "Not a valid selection"
+      return
+    elsif starting_piece.moves.nil?
+      raise ArgumentError, "No available moves."
     elsif !starting_piece.moves.include?(end_pos)
       raise ArgumentError, "Not a valid move."
+      return
     elsif !starting_piece.valid_moves.include?(end_pos)
       # p "here"
-      raise "cannot move into check"
+      raise "Cannot move into check"
+      return
     else
       move!(start, end_pos)
     end

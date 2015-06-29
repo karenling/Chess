@@ -37,7 +37,7 @@ class HumanPlayer
   end
 
   def play_turn(board)
-    # begin
+    begin
       puts "Current player: #{@color}"
       puts "From where:"
       response_start = gets.chomp #A7
@@ -72,10 +72,10 @@ class HumanPlayer
       # start_pos = response[0]
       # end_pos = response[1]
       board.move(start_pos, end_pos)
-    # rescue ArgumentError => e
-    #   puts e.message
-    #   retry
-    # end
+    rescue ArgumentError => e
+      puts "#{e.message} Please try again."
+      retry
+    end
 
   end
 end
