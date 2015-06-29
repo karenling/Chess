@@ -1,6 +1,7 @@
 class Knight < SteppingPiece
-  # def moves
-  # end
+  def symbols
+    {white: '♘', black: '♞'}
+  end
 
   def move_dirs
     [[-2, -1], [-2, 1], [2, -1], [2, 1],

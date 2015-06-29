@@ -11,6 +11,10 @@ class Pawn < Piece
     [-1, 0], [1, 0], [-2, 0], [2, 0]
   ]
 
+  def symbols
+    {white: '♙', black: '♟'}
+  end
+
   def moves
     available_moves = []
     # p self.move_dirs

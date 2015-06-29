@@ -203,8 +203,18 @@ class Board
   def render
     # p grid[7][4].moves
     @grid.each do |row|
-      p row
+      stringed_row = ""
+      row.each do |item|
+        if item
+          stringed_row += " #{item.render} "
+        else
+          stringed_row += " . "
+        end
+      end
+      puts stringed_row
     end
+
+    return nil
   end
 
   def test
@@ -220,7 +230,7 @@ end
 # p board.grid[6][4].move_into_check?([5, 3])
 # p board.move([6,4], [5,4])
 # p board.in_check?("white")
-# p board.render
+# board.render
 # p "IN CHECKMATE "
 # p board.checkmate?("white")
 # board.render

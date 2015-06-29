@@ -8,7 +8,12 @@ class Piece
   end
 
   def inspect
+
     "{ #{self.class} #{self.pos}  #{self.color} }"
+  end
+
+  def render
+    symbols[@color.to_sym]
   end
 
   def move_into_check?(pos)
