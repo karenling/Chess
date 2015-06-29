@@ -57,11 +57,10 @@ class Board
     return false
   end
 
-  def checkmate?(color) #we'll pass in "black". black has checkmate white if white has no no other white pieces to help him
+  def checkmate?(color) #color = white. white is in checkmate if it has no other moves
     return if !self.in_check?(color)
 
     pieces = []
-
 
     @grid.each do |row|
       row.each do |piece|
@@ -71,12 +70,6 @@ class Board
       end
     end
 
-
-
-
-    p pieces
-
-    p pieces
     pieces.each do |piece|
       # piece.valid_moves
       # p piece
@@ -221,15 +214,15 @@ class Board
 end
 
 
-board = Board.new
+# board = Board.new
 # p board.in_check?("black")
 # p board.grid[6][1].valid_moves
 # p board.grid[6][4].move_into_check?([5, 3])
 # p board.move([6,4], [5,4])
 # p board.in_check?("white")
-p board.render
-p "IN CHECKMATE "
-p board.checkmate?("white")
+# p board.render
+# p "IN CHECKMATE "
+# p board.checkmate?("white")
 # board.render
 
 
