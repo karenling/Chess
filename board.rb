@@ -59,20 +59,20 @@ class Board
 
 
 
-    # pawn_rows = [1, 6]
-    # pawn_cols = (0..7).to_a
-    #
-    # pawn_rows.each do |row|
-    #   pawn_cols.each do |col|
-    #     color = "black"
-    #     if row == 6
-    #       color = "white"
-    #     end
-    #
-    #     grid[row][col] = Pawn.new(self, [row, col], color)
-    #     p grid[row][col].moves
-    #   end
-    # end
+    pawn_rows = [1, 6]
+    pawn_cols = (0..7).to_a
+
+    pawn_rows.each do |row|
+      pawn_cols.each do |col|
+        color = "black"
+        if row == 6
+          color = "white"
+        end
+
+        grid[row][col] = Pawn.new(self, [row, col], color)
+        # p grid[row][col].moves
+      end
+    end
 
     grid
   end
@@ -82,7 +82,7 @@ class Board
   end
 
   def render
-    p grid[0][1].moves
+    p grid[1][0].moves
     # @grid.each do |row|
     #   p row
     # end
