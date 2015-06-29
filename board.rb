@@ -57,6 +57,7 @@ class Board
     grid[7][6] = Knight.new(self, [7, 6], "white")
     grid[7][7] = Rook.new(self, [7, 7], "white")
 
+# grid[5][5] = Bishop.new(self, [7, 5], "white")
 
 
     pawn_rows = [1, 6]
@@ -82,7 +83,7 @@ class Board
   end
 
   def render
-    p grid[1][2].moves
+    p grid[6][5].moves
     # @grid.each do |row|
     #   p row
     # end
