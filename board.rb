@@ -3,10 +3,10 @@ require_relative 'piece'
 require_relative 'stepping_piece'
 require_relative 'pawn'
 # require_relative 'king'
-# require_relative 'sliding_piece'
-# require_relative 'rook'
-# require_relative 'bishop'
-# require_relative 'queen'
+require_relative 'sliding_piece'
+require_relative 'rook'
+require_relative 'bishop'
+require_relative 'queen'
 
 class Board
 
@@ -34,20 +34,33 @@ class Board
   def self.setup_grid
     grid = Array.new(8) { Array.new(8) }
 
-    pawn_rows = [1, 6]
-    pawn_cols = (0..7).to_a
 
-    pawn_rows.each do |row|
-      pawn_cols.each do |col|
-        color = "black"
-        if row == 6
-          color = "white"
-        end
+    grid[0][0] = Rook.new(self, [0, 0], "black")
+    grid[0][7] = Rook.new(self, [0, 7], "black")
+    grid[0][2] = Bishop.new(self, [0, 2], "black")
+    grid[0][5] = Bishop.new(self, [0, 5], "black")
+    grid[0][3] = Queen.new(self, [0, 3], "black")
 
-        grid[row][col] = Pawn.new(self, [row, col], color)
-        p grid[row][col].moves
-      end
-    end
+    grid[7][0] = Rook.new(self, [7, 0], "white")
+    grid[7][7] = Rook.new(self, [7, 7], "white")
+    grid[7][2] = Bishop.new(self, [7, 2], "white")
+    grid[7][5] = Bishop.new(self, [7, 5], "white")
+    grid[7][3] = Queen.new(self, [7, 3], "white")
+
+    # pawn_rows = [1, 6]
+    # pawn_cols = (0..7).to_a
+    #
+    # pawn_rows.each do |row|
+    #   pawn_cols.each do |col|
+    #     color = "black"
+    #     if row == 6
+    #       color = "white"
+    #     end
+    #
+    #     grid[row][col] = Pawn.new(self, [row, col], color)
+    #     p grid[row][col].moves
+    #   end
+    # end
 
     grid
   end

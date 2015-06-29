@@ -11,9 +11,6 @@ class SlidingPiece < Piece
     [-1, 0], [1, 0]
   ]
 
-  def initialize
-    p "created sliding piece!"
-  end
   def moves
     p "something"
   end
