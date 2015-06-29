@@ -7,6 +7,9 @@ class Piece
     @color = color
   end
 
+  def inspect
+    "{ #{self.class} #{self.pos}  #{self.color} }"
+  end
   def moves # returns an array of places a piece can move to
   end
 
