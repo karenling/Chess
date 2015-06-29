@@ -74,6 +74,24 @@ class Board
 
   end
 
+  def dup
+    duplicate_board = Board.new
+    pieces = []
+    @grid.each do |row|
+      row.each do |piece|
+        if piece
+          type = piece.class
+          color = piece.color
+          position = piece.pos
+          duplicate_board.grid[position[0]][position[1]] = type.new(duplicate_board, position, color)
+          # p duplicate_board.grid[position[0]][position[1]]
+        end
+      end
+    end
+
+    duplicate_board
+  end
+
   def setup_grid
 
     grid = Array.new(8) { Array.new(8) }
@@ -144,6 +162,7 @@ end
 
 board = Board.new
 # p board.in_check?("black")
-board.move([4,7], [7,7])
-board.render
+# board.move([4,7], [7,7])
+# board.render
+board.dup
 # board.rook.move_dirs
