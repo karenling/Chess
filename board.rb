@@ -11,11 +11,12 @@ require 'colorize'
 
 class Board
   attr_reader :grid
-  attr_accessor :selected
+  attr_accessor :selected, :cursor_color
 
   def initialize
     @grid = setup_grid
     @selected = [7, 0]
+    @cursor_color = :magenta
 
     # @pawn = Pawn.new([0, 0])
     # add_piece(@pawn)
@@ -222,7 +223,7 @@ class Board
         background = counter.odd? ? :light_black : :light_white
 
         if @selected === [row_idx, item_idx]
-          background = :yellow
+          background = @cursor_color
         end
 
         if item

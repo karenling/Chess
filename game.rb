@@ -36,8 +36,10 @@ class HumanPlayer
   def play_turn(board)
     p @color
     if @color == "white"
+      board.cursor_color = :light_magenta
       board.selected = [7, 0]
     else
+      board.cursor_color = :cyan
       board.selected = [0, 0]
     end
     board.render
@@ -69,8 +71,8 @@ class HumanPlayer
       selected_piece = nil
       until response_start
           puts error.colorize(:red) if error
-          puts "Current player: #{@color}".colorize(:green)
-          puts "Use awsd to select a position to start at, then press enter.".colorize(:green)
+          puts "Current player: #{@color}".colorize(board.cursor_color)
+          puts "Use awsd to select a position to start at, then press enter. 'q' to quit.".colorize(board.cursor_color)
           input = $stdin.getch
           case input
           when "q"
@@ -101,9 +103,9 @@ class HumanPlayer
       response_end = nil
       until response_end
         puts error.colorize(:red) if error
-        puts "Current player: #{@color}".colorize(:green)
-        puts "You've selected one of your #{selected_piece.class}(s).".colorize(:green)
-        puts "Use awsd to select a position to end at, then press enter.".colorize(:green)
+        puts "Current player: #{@color}".colorize(board.cursor_color)
+        puts "You've selected one of your #{selected_piece.class}(s).".colorize(board.cursor_color)
+        puts "Use awsd to select a position to end at, then press enter. 'q' to quit.".colorize(board.cursor_color)
         input = $stdin.getch
         case input
         when "q"
