@@ -61,6 +61,10 @@ class Board
     # updates the 2d grid and also the moved piece's position. You'll want to raise an exception if: (a) there is no piece at start or (b) the piece cannot move to end_pos.
     starting_piece = @grid[start[0]][start[1]]
 
+    # if starting_piece.move_into_check?(end_pos)
+
+    # starting_piece.valid_moves
+
     if starting_piece.nil?
       raise ArgumentError, "You didn't select a piece"
     elsif !starting_piece.moves.include?(end_pos)
@@ -115,6 +119,9 @@ class Board
     grid[7][5] = Bishop.new(self, [7, 5], "white")
     grid[7][6] = Knight.new(self, [7, 6], "white")
     grid[7][7] = Rook.new(self, [7, 7], "white")
+
+    # grid[3][4] = Rook.new(self, [3, 4], "black")
+
     # grid[2][5] = Knight.new(self, [2, 5], "white")
 
     # grid[2][6] = Rook.new(self, [2, 6], "black")
@@ -162,7 +169,7 @@ end
 
 board = Board.new
 # p board.in_check?("black")
-# board.move([4,7], [7,7])
+p board.grid[6][5].move_into_check?([5,5])
 # board.render
-board.dup
+# board.dup
 # board.rook.move_dirs

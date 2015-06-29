@@ -22,7 +22,9 @@ class Piece
   end
 
   def valid_moves
-
+    self.moves.reject do |move|
+      self.move_into_check?(move)
+    end
   end
 
   def add_positions(delta)
