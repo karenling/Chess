@@ -10,7 +10,7 @@ class Game
 
   def play
     @board.render
-    puts "Lets play! Positions should be entered e.g. 'A7'"
+    puts "Lets play! Positions should be entered e.g. 'A7'".colorize(:green)
     i = 0
     while !@board.checkmate?("white") && !@board.checkmate?("black")
       player = (i % 2 == 0 ? @player1 : @player2)
@@ -19,9 +19,9 @@ class Game
     end
 
     if @board.checkmate?("white")
-      puts "#{@player1.color.capitalize} is checkmated, #{@player2.color.capitalize}, you win!"
+      puts "#{@player1.color.capitalize} is checkmated, #{@player2.color.capitalize}, you win!".colorize(:light_magenta)
     else
-      puts "#{@player2.color.capitalize} is checkmated, #{@player1.color.capitalize}, you win!"
+      puts "#{@player2.color.capitalize} is checkmated, #{@player1.color.capitalize}, you win!".colorize(:light_magenta)
     end
   end
 
@@ -66,10 +66,11 @@ class HumanPlayer
 
       error = nil
       response_start = nil
+      selected_piece = nil
       until response_start
-          puts error if error
-          puts "Current player: #{@color}"
-          puts "Use awsd to select a position to start at, then press enter."
+          puts error.colorize(:red) if error
+          puts "Current player: #{@color}".colorize(:green)
+          puts "Use awsd to select a position to start at, then press enter.".colorize(:green)
           input = $stdin.getch
           case input
           when "q"
@@ -87,6 +88,7 @@ class HumanPlayer
               error = "Not your color!"
             else
               response_start = board.selected
+              selected_piece = board.grid[board.selected[0]][board.selected[1]]
             end
           end
           board.render
@@ -98,9 +100,10 @@ class HumanPlayer
       error = nil
       response_end = nil
       until response_end
-        puts error if error
-        puts "Current player: #{@color}"
-        puts "Use awsd to select a position to end at, then press enter."
+        puts error.colorize(:red) if error
+        puts "Current player: #{@color}".colorize(:green)
+        puts "You've selected one of your #{selected_piece.class}(s).".colorize(:green)
+        puts "Use awsd to select a position to end at, then press enter.".colorize(:green)
         input = $stdin.getch
         case input
         when "q"
