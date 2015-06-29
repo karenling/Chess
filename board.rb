@@ -15,7 +15,7 @@ class Board
 
   def initialize
     @grid = setup_grid
-    @selected = [0, 0]
+    @selected = [7, 0]
 
     # @pawn = Pawn.new([0, 0])
     # add_piece(@pawn)

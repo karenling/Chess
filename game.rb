@@ -34,6 +34,14 @@ class HumanPlayer
   end
 
   def play_turn(board)
+    p @color
+    if @color == "white"
+      board.selected = [7, 0]
+    else
+      board.selected = [0, 0]
+    end
+    board.render
+
     begin
 
 
