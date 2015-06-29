@@ -4,12 +4,13 @@ class Game
   attr_reader :board
   def initialize
     @board = Board.new
-    @player1 = HumanPlayer.new("Alice", "white")
-    @player2 = HumanPlayer.new("Jon", "black")
+    @player1 = HumanPlayer.new("white")
+    @player2 = HumanPlayer.new("black")
   end
 
   def play
     @board.render
+    puts "Lets play! Positions should be entered e.g. 'A7'"
     i = 0
     while !@board.checkmate?("white") && !@board.checkmate?("black")
       player = (i % 2 == 0 ? @player1 : @player2)
@@ -21,26 +22,26 @@ class Game
     end
 
     if @board.checkmate?("white")
-      puts "#{@player2.name}, you win!"
+      puts "#{@player1.color.capitalize} is checkmated, #{@player2.color.capitalize}, you win!"
     else
-      puts "#{@player1.name}, you win!"
+      puts "#{@player2.color.capitalize} is checkmated, #{@player1.color.capitalize}, you win!"
     end
   end
 
 end
 
 class HumanPlayer
-  attr_reader :name
-  def initialize(name, color)
-    @name = name
+  attr_reader :color
+  def initialize(color)
     @color = color
   end
 
   def play_turn(board)
     # begin
-      puts "#{@name}, what would you like to move?"
+      puts "Current player: #{@color}"
+      puts "From where:"
       response_start = gets.chomp #A7
-      puts "#{@name}, where would you like to move to?"
+      puts "To where:"
       response_end = gets.chomp # A5
 
       convert = {

@@ -60,22 +60,18 @@ class Board
   def checkmate?(color) #color = white. white is in checkmate if it has no other moves
     return if !self.in_check?(color)
 
-    p "CHECKING CHECKMATE"
     pieces = []
 
     @grid.each do |row|
       row.each do |piece|
-        if piece && piece.color == "white"
+        if piece && piece.color == color
           pieces << piece
         end
       end
     end
 
     pieces.each do |piece|
-      # piece.valid_moves
-      # p piece
       if piece.valid_moves.count > 0
-        p "false"
         return true
       end
     end
