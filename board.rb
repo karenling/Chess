@@ -82,7 +82,7 @@ class Board
   end
 
   def render
-    p grid[0][3].moves
+    p grid[0][4].moves
     # @grid.each do |row|
     #   p row
     # end
