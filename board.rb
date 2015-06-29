@@ -7,6 +7,7 @@ require_relative 'rook'
 require_relative 'bishop'
 require_relative 'queen'
 require_relative 'pawn'
+require 'colorize'
 
 class Board
   attr_reader :grid
@@ -208,18 +209,22 @@ class Board
   def render
     # p grid[7][4].moves
 
+    counter = 0
     i = 8
     @grid.each do |row|
       stringed_row = "#{i} "
       i -= 1
       row.each do |item|
+        counter += 1
+        background = counter.odd? ? :red : :light_blue
         if item
-          stringed_row += " #{item.render} "
+          stringed_row += "#{item.render}".center(5).colorize(:color => item.color.to_sym, :background => background)
         else
-          stringed_row += " . "
+          stringed_row += "".center(5).colorize(:background => background)
         end
       end
       puts stringed_row
+      counter+=1
     end
         puts "   A  B  C  D  E  F  G  H"
     return nil
