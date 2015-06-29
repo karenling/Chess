@@ -11,9 +11,11 @@ require 'colorize'
 
 class Board
   attr_reader :grid
+  attr_accessor :selected
 
   def initialize
     @grid = setup_grid
+    @selected = [0, 0]
 
     # @pawn = Pawn.new([0, 0])
     # add_piece(@pawn)
@@ -208,25 +210,30 @@ class Board
 
   def render
     # p grid[7][4].moves
-
+    # system 'clear'
     counter = 0
     i = 8
-    @grid.each do |row|
+    @grid.each_with_index do |row, row_idx|
       stringed_row_top = "  "
       stringed_row = "#{i} "
       stringed_row_bottom = "  "
       i -= 1
-      row.each do |item|
+      row.each_with_index do |item, item_idx|
         counter += 1
         background = counter.odd? ? :light_black : :light_white
-        stringed_row_top += "".center(7).colorize(:background => background)
-        stringed_row_bottom += "".center(7).colorize(:background => background)
+
+        if @selected === [row_idx, item_idx]
+          background = :red
+        end
 
         if item
-
+          stringed_row_top += "".center(7).colorize(:background => background)
+          stringed_row_bottom += "".center(7).colorize(:background => background)
           stringed_row += "#{item.render}".center(7).colorize(:color => item.color.to_sym, :background => background)
 
         else
+          stringed_row_top += "".center(7).colorize(:background => background)
+          stringed_row_bottom += "".center(7).colorize(:background => background)
           stringed_row += "".center(7).colorize(:background => background)
         end
       end

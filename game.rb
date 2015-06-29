@@ -1,5 +1,5 @@
 require_relative 'board'
-
+require 'io/console'
 class Game
   attr_reader :board
   def initialize
@@ -38,11 +38,12 @@ class HumanPlayer
 
   def play_turn(board)
     begin
+
       puts "Current player: #{@color}"
-      puts "From where:"
-      response_start = gets.chomp #A7
-      puts "To where:"
-      response_end = gets.chomp # A5
+      # puts "From where:"
+      # response_start = gets.chomp #A7
+      # puts "To where:"
+      # response_end = gets.chomp # A5
 
       convert = {
         "A" => 0,
@@ -54,24 +55,45 @@ class HumanPlayer
         "G" => 6,
         "H" => 7
       }
-      start_second = convert[response_start[0].upcase] # A
-      start_first = 8 - response_start[1].to_i # 7
-
-      start_pos = [start_first, start_second]
-      p start_pos
 
 
-      end_second = convert[response_end[0].upcase] # A
-      end_first = 8 - response_end[1].to_i # 7
+      input = $stdin.getch
 
-      end_pos = [end_first, end_second]
-      p end_pos
+      p input
+      case input
+      when "q"
+        exit
 
+      when "\e[A"
+        board.selected = [4, 5]
+      when "\e[B"
+        board.selected = [1, 1]
+      when "\[C"
+        board.selected = [3, 3]
+      when "\[D"
+        board.selected = [7, 5]
+      end
 
-      # response = [response_start.split("").map(&:to_i), response_end.split("").map(&:to_i)]
-      # start_pos = response[0]
-      # end_pos = response[1]
-      board.move(start_pos, end_pos)
+      puts board.selected[0]
+
+#       board.render
+# p input
+
+      # start_second = convert[response_start[0].upcase] # A
+      # start_first = 8 - response_start[1].to_i # 7
+      #
+      # start_pos = [start_first, start_second]
+      # p start_pos
+      #
+      #
+      # end_second = convert[response_end[0].upcase] # A
+      # end_first = 8 - response_end[1].to_i # 7
+      #
+      # end_pos = [end_first, end_second]
+      # p end_pos
+      #
+      #
+      # board.move(start_pos, end_pos)
     rescue ArgumentError => e
       puts "#{e.message} Please try again."
       retry
