@@ -235,7 +235,7 @@ class Board
       puts stringed_row_bottom
       counter+=1
     end
-        puts "   A  B  C  D  E  F  G  H"
+        puts "     A      B      C      D      E      F      G      H"
     return nil
   end
 
