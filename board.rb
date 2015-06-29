@@ -41,11 +41,14 @@ class Board
     grid[0][5] = Bishop.new(self, [0, 5], "black")
     grid[0][3] = Queen.new(self, [0, 3], "black")
 
+
+
     grid[7][0] = Rook.new(self, [7, 0], "white")
     grid[7][7] = Rook.new(self, [7, 7], "white")
     grid[7][2] = Bishop.new(self, [7, 2], "white")
     grid[7][5] = Bishop.new(self, [7, 5], "white")
     grid[7][3] = Queen.new(self, [7, 3], "white")
+
 
     # pawn_rows = [1, 6]
     # pawn_cols = (0..7).to_a
