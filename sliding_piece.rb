@@ -1,4 +1,4 @@
-
+require_relative 'piece'
 
 class SlidingPiece < Piece
   DIAGONAL_DIRS = [
@@ -10,6 +10,10 @@ class SlidingPiece < Piece
   VERTICAL_DIRS = [
     [-1, 0], [1, 0]
   ]
+
+  def initialize
+    p "created sliding piece!"
+  end
   def moves
     p "something"
   end
