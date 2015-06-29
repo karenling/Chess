@@ -1,9 +1,10 @@
 
 class Piece
-  attr_reader :pos
-  def initialize(board, pos)
+  attr_reader :pos, :board, :color
+  def initialize(board, pos, color)
     @board = board
     @pos = pos
+    @color = color
   end
 
   def moves # returns an array of places a piece can move to

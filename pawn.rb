@@ -1,9 +1,15 @@
 class Pawn < SteppingPiece
+
   def moves
     super
 
   end
   def move_dirs
-    VERTICAL_DIRS[0]
+    if self.color === "black"
+      VERTICAL_DIRS[1]
+    else
+      VERTICAL_DIRS[0]
+    end
+
   end
 end

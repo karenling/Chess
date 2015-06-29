@@ -33,12 +33,26 @@ class Board
 
   def self.setup_grid
     grid = Array.new(8) { Array.new(8) }
-    grid[0][0] = Pawn.new(self, [0, 0])
+
+    pawn_rows = [1, 6]
+    pawn_cols = (0..7).to_a
+
+    pawn_rows.each do |row|
+      pawn_cols.each do |col|
+        color = "black"
+        if row == 6
+          color = "white"
+        end
+
+        grid[row][col] = Pawn.new(self, [row, col], color)
+        p grid[row][col].moves
+      end
+    end
+
     grid
   end
 
   def add_piece(piece)
-
     @grid[piece.pos[0]][piece.pos[1]] = piece
   end
 
