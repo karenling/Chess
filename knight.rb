@@ -1,6 +1,6 @@
-class Knight < Piece
-  def moves
-  end
+class Knight < SteppingPiece
+  # def moves
+  # end
 
   def move_dirs
     [[-2, -1], [-2, 1], [2, -1], [2, 1],

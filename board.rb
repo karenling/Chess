@@ -1,12 +1,12 @@
 require_relative 'piece'
-require_relative 'knight'
 require_relative 'stepping_piece'
-require_relative 'pawn'
+require_relative 'knight'
 require_relative 'king'
 require_relative 'sliding_piece'
 require_relative 'rook'
 require_relative 'bishop'
 require_relative 'queen'
+require_relative 'pawn'
 
 class Board
   attr_reader :grid
@@ -82,7 +82,7 @@ class Board
   end
 
   def render
-    p grid[0][4].moves
+    p grid[0][1].moves
     # @grid.each do |row|
     #   p row
     # end
