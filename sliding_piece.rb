@@ -11,6 +11,10 @@ class SlidingPiece < Piece
     [-1, 0], [1, 0]
   ]
 
+  def position_empty(pos)
+    !self.board.grid[pos[0]][pos[1]].nil?
+  end
+
   def moves
     available_moves = []
 
@@ -19,28 +23,24 @@ class SlidingPiece < Piece
       new_position = [self.pos[0] + dir[0], self.pos[1] + dir[1]];
       i = 1
       while (new_position[0] < 8 && new_position[1] < 8 && new_position[0] >= 0 && new_position[1] >= 0) do
-        # return if !grid[new_position[0]][new_position[1]].nil?
-        # potential_pos = self.board.grid[new_position[0]][new_position[1]]
-        # if !potential_pos.nil?
-        #   if potential_pos.color != self.color
-        #     available_moves << new_position
-        #     return
-        #   else
-        #     return
-        #   end
-        #
-        #
-        # end
-        available_moves << new_position
-        new_dir = [dir[0]*i, dir[1]*i]
-        new_position = self.add_positions(new_dir)
+        grid_piece = self.board.grid[new_position[0]][new_position[1]]
+        if !grid_piece.nil? && grid_piece.color == self.color
+          break
+        elsif !grid_piece.nil? && grid_piece.color != self.color
+          available_moves << new_position
+          break
+        else
+          available_moves << new_position
+          new_dir = [dir[0]*i, dir[1]*i]
+          new_position = self.add_positions(new_dir)
+        end
         i+=1
       end
     end
 
 
     available_moves.uniq!
-    # 
+    #
     # cleaned_moves = []
     #
     # available_moves.each do |move|

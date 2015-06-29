@@ -14,7 +14,7 @@ class Piece
 
   end
 
-  def add_positions(new_pos)
-    [@pos[0] + new_pos[0], @pos[1] + new_pos[1]]
+  def add_positions(delta)
+    [@pos[0] + delta[0], @pos[1] + delta[1]]
   end
 end

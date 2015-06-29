@@ -13,9 +13,7 @@ class Pawn < Piece
 
   def moves
     available_moves = []
-    p self.move_dirs
     self.move_dirs.each do |dir|
-      p dir
       new_position =  self.add_positions(dir)
       if new_position[0] < 8 && new_position[1] < 8 && new_position[0] >= 0 && new_position[1] >= 0
         available_moves << new_position
