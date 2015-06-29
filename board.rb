@@ -27,6 +27,34 @@ class Board
   def in_check?(color)
     # returns whether a player is in check
     # You can implement this by (1) finding the position of the king on the board then (2) seeing if any of the opposing pieces can move to that position.
+
+    #find the king
+
+    # get all opposing pieces
+    king = nil
+    pieces = []
+     @grid.each do |row|
+      row.each do |piece|
+        if piece && piece.color === color && piece.is_a?(King)
+          king = piece
+        end
+        if piece && piece.color != color
+          pieces << piece
+        end
+      end
+    end
+
+    pieces.each do |piece|
+      if piece.moves
+        piece.moves.each do |position|
+          if king.pos === position
+            return true
+          end
+        end
+      end
+    end
+
+    return false
   end
 
   def move(start, end_pos)
@@ -56,6 +84,7 @@ class Board
     grid[7][5] = Bishop.new(self, [7, 5], "white")
     grid[7][6] = Knight.new(self, [7, 6], "white")
     grid[7][7] = Rook.new(self, [7, 7], "white")
+    # grid[2][5] = Knight.new(self, [2, 5], "white")
 
     # grid[2][6] = Rook.new(self, [2, 6], "black")
 
@@ -101,6 +130,6 @@ end
 
 
 board = Board.new
-board.render
+p board.in_check?("black")
 # board.render
 # board.rook.move_dirs
