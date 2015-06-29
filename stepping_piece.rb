@@ -18,7 +18,14 @@ class SteppingPiece < Piece
       # p dir
       new_position = self.add_positions(dir)
       if (new_position[0] < 8 && new_position[1] < 8 && new_position[0] >= 0 && new_position[1] >= 0)
-        available_moves << new_position
+        grid_piece = self.board.grid[new_position[0]][new_position[1]]
+        if !grid_piece.nil? && grid_piece.color == self.color
+          break
+        elsif !grid_piece.nil? && grid_piece.color != self.color
+          available_moves << new_position
+        else
+          available_moves << new_position
+        end
       end
     end
 
