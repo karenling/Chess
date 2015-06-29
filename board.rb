@@ -59,6 +59,19 @@ class Board
 
   def move(start, end_pos)
     # updates the 2d grid and also the moved piece's position. You'll want to raise an exception if: (a) there is no piece at start or (b) the piece cannot move to end_pos.
+    starting_piece = @grid[start[0]][start[1]]
+
+    if starting_piece.nil?
+      raise ArgumentError, "You didn't select a piece"
+    elsif !starting_piece.moves.include?(end_pos)
+      raise ArgumentError, "Not a valid move."
+    else
+
+      @grid[end_pos[0]][end_pos[1]] = starting_piece
+      @grid[end_pos[0]][end_pos[1]].pos = end_pos
+      @grid[start[0]][start[1]] = nil
+    end
+
   end
 
   def setup_grid
@@ -130,6 +143,7 @@ end
 
 
 board = Board.new
-p board.in_check?("black")
-# board.render
+# p board.in_check?("black")
+board.move([4,7], [7,7])
+board.render
 # board.rook.move_dirs
