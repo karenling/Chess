@@ -5,6 +5,3 @@ class Rook < SlidingPiece
     p DIAGONAL_DIRS
   end
 end
-
-rook1 = Rook.new
-rook1.move_dirs
