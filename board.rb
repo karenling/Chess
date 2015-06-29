@@ -35,7 +35,7 @@ class Board
     pieces = []
      @grid.each do |row|
       row.each do |piece|
-        if piece && piece.color === color && piece.is_a?(King)
+        if piece && piece.color == color && piece.is_a?(King)
           king = piece
         end
         if piece && piece.color != color
@@ -55,6 +55,26 @@ class Board
     end
 
     return false
+  end
+
+  def checkmate?(color) #we'll pass in "black". black has checkmate white if white has no no other white pieces to help him
+    # return if self.in_check?(color)
+    pieces = []
+
+    if self.in_check?(color)
+      @grid.each do |row|
+        row.each do |piece|
+          if piece && piece.color == color && !piece.valid_moves.empty?
+            return false
+          end
+        end
+      end
+    else
+      return true
+    end
+
+    # return true
+
   end
 
   def move!(start, end_pos)
@@ -120,15 +140,15 @@ class Board
     grid[0][6] = Knight.new(self, [0, 6], "black")
     grid[0][7] = Rook.new(self, [0, 7], "black")
 
-
-    grid[7][0] = Rook.new(self, [7, 0], "white")
-    grid[7][1] = Knight.new(self, [7, 1], "white")
-    grid[7][2] = Bishop.new(self, [7, 2], "white")
-    grid[7][3] = Queen.new(self, [7, 3], "white")
+    #
+    # grid[7][0] = Rook.new(self, [7, 0], "white")
+    # grid[7][1] = Knight.new(self, [7, 1], "white")
+    # grid[7][2] = Bishop.new(self, [7, 2], "white")
+    # grid[7][3] = Queen.new(self, [7, 3], "white")
     grid[7][4] = King.new(self, [7, 4], "white")
-    grid[7][5] = Bishop.new(self, [7, 5], "white")
-    grid[7][6] = Knight.new(self, [7, 6], "white")
-    grid[7][7] = Rook.new(self, [7, 7], "white")
+    # grid[7][5] = Bishop.new(self, [7, 5], "white")
+    # grid[7][6] = Knight.new(self, [7, 6], "white")
+    # grid[7][7] = Rook.new(self, [7, 7], "white")
 
     grid[3][4] = Rook.new(self, [3, 4], "black")
 
@@ -139,20 +159,20 @@ class Board
 # grid[5][5] = Bishop.new(self, [5, 5], "white")
 
 
-    pawn_rows = [1, 6]
-    pawn_cols = (0..7).to_a
-
-    pawn_rows.each do |row|
-      pawn_cols.each do |col|
-        color = "black"
-        if row == 6
-          color = "white"
-        end
-
-        grid[row][col] = Pawn.new(self, [row, col], color)
-        # p grid[row][col].moves
-      end
-    end
+    # pawn_rows = [1, 6]
+    # pawn_cols = (0..7).to_a
+    #
+    # pawn_rows.each do |row|
+    #   pawn_cols.each do |col|
+    #     color = "black"
+    #     if row == 6
+    #       color = "white"
+    #     end
+    #
+    #     grid[row][col] = Pawn.new(self, [row, col], color)
+    #     # p grid[row][col].moves
+    #   end
+    # end
 
     grid
   end
@@ -181,7 +201,8 @@ board = Board.new
 # p board.in_check?("black")
 # p board.grid[6][1].valid_moves
 # p board.grid[6][4].move_into_check?([5, 3])
-p board.move([6,4], [5,4])
+# p board.move([6,4], [5,4])
+p board.checkmate?("black")
 board.render
 # board.dup
 # board.rook.move_dirs
