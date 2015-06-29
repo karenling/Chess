@@ -176,20 +176,20 @@ class Board
 # grid[5][5] = Bishop.new(self, [5, 5], "white")
 
 
-    # pawn_rows = [1, 6]
-    # pawn_cols = (0..7).to_a
-    #
-    # pawn_rows.each do |row|
-    #   pawn_cols.each do |col|
-    #     color = "black"
-    #     if row == 6
-    #       color = "white"
-    #     end
-    #
-    #     grid[row][col] = Pawn.new(self, [row, col], color)
-    #     # p grid[row][col].moves
-    #   end
-    # end
+    pawn_rows = [1, 6]
+    pawn_cols = (0..7).to_a
+
+    pawn_rows.each do |row|
+      pawn_cols.each do |col|
+        color = "black"
+        if row == 6
+          color = "white"
+        end
+
+        grid[row][col] = Pawn.new(self, [row, col], color)
+        # p grid[row][col].moves
+      end
+    end
 
     grid
   end
