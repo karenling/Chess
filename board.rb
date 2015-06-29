@@ -57,6 +57,16 @@ class Board
     return false
   end
 
+  def move!(start, end_pos)
+    starting_piece = @grid[start[0]][start[1]]
+
+    @grid[end_pos[0]][end_pos[1]] = starting_piece
+    @grid[end_pos[0]][end_pos[1]].pos = end_pos
+    @grid[start[0]][start[1]] = nil
+
+  end
+
+
   def move(start, end_pos)
     # updates the 2d grid and also the moved piece's position. You'll want to raise an exception if: (a) there is no piece at start or (b) the piece cannot move to end_pos.
     starting_piece = @grid[start[0]][start[1]]
@@ -66,14 +76,14 @@ class Board
     # starting_piece.valid_moves
 
     if starting_piece.nil?
-      raise ArgumentError, "You didn't select a piece"
+      raise ArgumentError, "Not a valid selection"
     elsif !starting_piece.moves.include?(end_pos)
       raise ArgumentError, "Not a valid move."
+    elsif !starting_piece.valid_moves.include?(end_pos)
+      # p "here"
+      raise "cannot move into check"
     else
-
-      @grid[end_pos[0]][end_pos[1]] = starting_piece
-      @grid[end_pos[0]][end_pos[1]].pos = end_pos
-      @grid[start[0]][start[1]] = nil
+      move!(start, end_pos)
     end
 
   end
@@ -120,7 +130,7 @@ class Board
     grid[7][6] = Knight.new(self, [7, 6], "white")
     grid[7][7] = Rook.new(self, [7, 7], "white")
 
-    # grid[3][4] = Rook.new(self, [3, 4], "black")
+    grid[3][4] = Rook.new(self, [3, 4], "black")
 
     # grid[2][5] = Knight.new(self, [2, 5], "white")
 
@@ -169,7 +179,9 @@ end
 
 board = Board.new
 # p board.in_check?("black")
-p board.grid[6][5].move_into_check?([5,5])
-# board.render
+# p board.grid[6][1].valid_moves
+# p board.grid[6][4].move_into_check?([5, 3])
+p board.move([6,4], [5,4])
+board.render
 # board.dup
 # board.rook.move_dirs
