@@ -210,7 +210,7 @@ class Board
 
   def render
     # p grid[7][4].moves
-    # system 'clear'
+    system 'clear'
     counter = 0
     i = 8
     @grid.each_with_index do |row, row_idx|
@@ -223,7 +223,7 @@ class Board
         background = counter.odd? ? :light_black : :light_white
 
         if @selected === [row_idx, item_idx]
-          background = :red
+          background = :yellow
         end
 
         if item

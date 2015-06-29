@@ -15,9 +15,6 @@ class Game
     while !@board.checkmate?("white") && !@board.checkmate?("black")
       player = (i % 2 == 0 ? @player1 : @player2)
       player.play_turn(@board)
-
-      @board.render
-
       i += 1
     end
 
@@ -56,28 +53,57 @@ class HumanPlayer
         "H" => 7
       }
 
+      puts "Use awsd to select a position to start at, then press enter."
 
-      input = $stdin.getch
+      response_start = nil
 
-      p input
-      case input
-      when "q"
-        exit
 
-      when "\e[A"
-        board.selected = [4, 5]
-      when "\e[B"
-        board.selected = [1, 1]
-      when "\[C"
-        board.selected = [3, 3]
-      when "\[D"
-        board.selected = [7, 5]
+      until response_start
+        input = $stdin.getch
+        case input
+        when "q"
+          exit
+        when "w"
+          board.selected = [board.selected[0] - 1, board.selected[1]]
+        when "a"
+          board.selected = [board.selected[0], board.selected[1] - 1]
+        when "s"
+          board.selected = [board.selected[0] + 1, board.selected[1]]
+        when "d"
+          board.selected = [board.selected[0], board.selected[1] + 1]
+        when "\r"
+          response_start = board.selected
+        end
+        board.render
       end
 
-      puts board.selected[0]
 
-#       board.render
-# p input
+      response_end = nil
+      until response_end
+        puts "Use awsd to select a position to end at, then press enter."
+        input = $stdin.getch
+        case input
+        when "q"
+          exit
+        when "w"
+          board.selected = [board.selected[0] - 1, board.selected[1]]
+        when "a"
+          board.selected = [board.selected[0], board.selected[1] - 1]
+        when "s"
+          board.selected = [board.selected[0] + 1, board.selected[1]]
+        when "d"
+          board.selected = [board.selected[0], board.selected[1] + 1]
+        when "\r"
+          response_end = board.selected
+        end
+        board.render
+      end
+
+
+
+
+      p response_start
+      p response_end
 
       # start_second = convert[response_start[0].upcase] # A
       # start_first = 8 - response_start[1].to_i # 7
@@ -91,9 +117,11 @@ class HumanPlayer
       #
       # end_pos = [end_first, end_second]
       # p end_pos
-      #
-      #
-      # board.move(start_pos, end_pos)
+
+
+      board.move(response_start, response_end)
+
+      board.render
     rescue ArgumentError => e
       puts "#{e.message} Please try again."
       retry
