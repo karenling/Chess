@@ -212,18 +212,27 @@ class Board
     counter = 0
     i = 8
     @grid.each do |row|
+      stringed_row_top = "  "
       stringed_row = "#{i} "
+      stringed_row_bottom = "  "
       i -= 1
       row.each do |item|
         counter += 1
-        background = counter.odd? ? :red : :light_blue
+        background = counter.odd? ? :light_black : :light_white
+        stringed_row_top += "".center(7).colorize(:background => background)
+        stringed_row_bottom += "".center(7).colorize(:background => background)
+
         if item
-          stringed_row += "#{item.render}".center(5).colorize(:color => item.color.to_sym, :background => background)
+
+          stringed_row += "#{item.render}".center(7).colorize(:color => item.color.to_sym, :background => background)
+
         else
-          stringed_row += "".center(5).colorize(:background => background)
+          stringed_row += "".center(7).colorize(:background => background)
         end
       end
+      puts stringed_row_top
       puts stringed_row
+      puts stringed_row_bottom
       counter+=1
     end
         puts "   A  B  C  D  E  F  G  H"
