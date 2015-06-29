@@ -9,7 +9,7 @@ class Game
   end
 
   def play
-    @board.render
+    # @board.render
     puts "Lets play! Positions should be entered e.g. 'A7'".colorize(:green)
     i = 0
     while !@board.checkmate?("white") && !@board.checkmate?("black")
@@ -72,19 +72,27 @@ class HumanPlayer
       until response_start
           puts error.colorize(:red) if error
           puts "Current player: #{@color}".colorize(board.cursor_color)
-          puts "Use awsd to select a position to start at, then press enter. 'q' to quit.".colorize(board.cursor_color)
+          puts "Use awsd to select a position to start at, then press enter.".colorize(board.cursor_color)
           input = $stdin.getch
           case input
           when "q"
             exit
           when "w"
-            board.selected = [board.selected[0] - 1, board.selected[1]]
+            if (board.selected[0] - 1) >= 0
+              board.selected = [board.selected[0] - 1, board.selected[1]]
+            end
           when "a"
-            board.selected = [board.selected[0], board.selected[1] - 1]
+            if (board.selected[1] -1) >= 0
+              board.selected = [board.selected[0], board.selected[1] - 1]
+            end
           when "s"
-            board.selected = [board.selected[0] + 1, board.selected[1]]
+            if (board.selected[0] + 1) < 8
+              board.selected = [board.selected[0] + 1, board.selected[1]]
+            end
           when "d"
-            board.selected = [board.selected[0], board.selected[1] + 1]
+            if (board.selected[1] + 1) < 8
+              board.selected = [board.selected[0], board.selected[1] + 1]
+            end
           when "\r"
             if board.grid[board.selected[0]][board.selected[1]].color != @color
               error = "Not your color!"
@@ -105,7 +113,7 @@ class HumanPlayer
         puts error.colorize(:red) if error
         puts "Current player: #{@color}".colorize(board.cursor_color)
         puts "You've selected one of your #{selected_piece.class}(s).".colorize(board.cursor_color)
-        puts "Use awsd to select a position to end at, then press enter. 'q' to quit.".colorize(board.cursor_color)
+        puts "Use awsd to select a position to end at, then press enter.".colorize(board.cursor_color)
         input = $stdin.getch
         case input
         when "q"

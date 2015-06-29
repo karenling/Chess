@@ -16,7 +16,7 @@ class Board
   def initialize
     @grid = setup_grid
     @selected = [7, 0]
-    @cursor_color = :magenta
+    @cursor_color = nil
 
     # @pawn = Pawn.new([0, 0])
     # add_piece(@pawn)
@@ -211,6 +211,7 @@ class Board
 
   def render
     system 'clear'
+    puts "Chess! Press 'q' to quit.".colorize(:yellow)
     counter = 0
     i = 8
     @grid.each_with_index do |row, row_idx|
