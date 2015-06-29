@@ -6,6 +6,6 @@ class Rook < SlidingPiece
   end
 
   def move_dirs
-    p DIAGONAL_DIRS
+    HORIZONTAL_DIRS + VERTICAL_DIRS
   end
 end
