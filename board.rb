@@ -209,7 +209,6 @@ class Board
 
 
   def render
-    # p grid[7][4].moves
     system 'clear'
     counter = 0
     i = 8

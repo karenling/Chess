@@ -36,50 +36,62 @@ class HumanPlayer
   def play_turn(board)
     begin
 
-      puts "Current player: #{@color}"
+
       # puts "From where:"
       # response_start = gets.chomp #A7
       # puts "To where:"
       # response_end = gets.chomp # A5
+      #
+      # convert = {
+      #   "A" => 0,
+      #   "B" => 1,
+      #   "C" => 2,
+      #   "D" => 3,
+      #   "E" => 4,
+      #   "F" => 5,
+      #   "G" => 6,
+      #   "H" => 7
+      # }
 
-      convert = {
-        "A" => 0,
-        "B" => 1,
-        "C" => 2,
-        "D" => 3,
-        "E" => 4,
-        "F" => 5,
-        "G" => 6,
-        "H" => 7
-      }
 
-      puts "Use awsd to select a position to start at, then press enter."
 
+
+      error = nil
       response_start = nil
-
-
       until response_start
-        input = $stdin.getch
-        case input
-        when "q"
-          exit
-        when "w"
-          board.selected = [board.selected[0] - 1, board.selected[1]]
-        when "a"
-          board.selected = [board.selected[0], board.selected[1] - 1]
-        when "s"
-          board.selected = [board.selected[0] + 1, board.selected[1]]
-        when "d"
-          board.selected = [board.selected[0], board.selected[1] + 1]
-        when "\r"
-          response_start = board.selected
-        end
-        board.render
+          puts error if error
+          puts "Current player: #{@color}"
+          puts "Use awsd to select a position to start at, then press enter."
+          input = $stdin.getch
+          case input
+          when "q"
+            exit
+          when "w"
+            board.selected = [board.selected[0] - 1, board.selected[1]]
+          when "a"
+            board.selected = [board.selected[0], board.selected[1] - 1]
+          when "s"
+            board.selected = [board.selected[0] + 1, board.selected[1]]
+          when "d"
+            board.selected = [board.selected[0], board.selected[1] + 1]
+          when "\r"
+            if board.grid[board.selected[0]][board.selected[1]].color != @color
+              error = "Not your color!"
+            else
+              response_start = board.selected
+            end
+          end
+          board.render
+
       end
 
 
+
+      error = nil
       response_end = nil
       until response_end
+        puts error if error
+        puts "Current player: #{@color}"
         puts "Use awsd to select a position to end at, then press enter."
         input = $stdin.getch
         case input
