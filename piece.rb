@@ -10,7 +10,14 @@ class Piece
   def inspect
     "{ #{self.class} #{self.pos}  #{self.color} }"
   end
-  
+
+  def move_into_check?(pos)
+    duplicate_board = @board.dup
+    duplicate_board.move(self.pos, pos)
+
+    duplicate_board.in_check?(@color)
+  end
+
   def moves # returns an array of places a piece can move to
   end
 
