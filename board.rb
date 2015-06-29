@@ -58,21 +58,34 @@ class Board
   end
 
   def checkmate?(color) #we'll pass in "black". black has checkmate white if white has no no other white pieces to help him
-    # return if self.in_check?(color)
+    return if !self.in_check?(color)
+
     pieces = []
 
-    if self.in_check?(color)
-      @grid.each do |row|
-        row.each do |piece|
-          if piece && piece.color == color && !piece.valid_moves.empty?
-            return false
-          end
+
+    @grid.each do |row|
+      row.each do |piece|
+        if piece && piece.color == "white"
+          pieces << piece
         end
       end
-    else
-      return true
     end
 
+
+
+
+    p pieces
+
+    p pieces
+    pieces.each do |piece|
+      # piece.valid_moves
+      # p piece
+      if piece.valid_moves.count > 0
+        return false
+      end
+    end
+
+    return true
     # return true
 
   end
@@ -141,16 +154,27 @@ class Board
     grid[0][7] = Rook.new(self, [0, 7], "black")
 
     #
-    # grid[7][0] = Rook.new(self, [7, 0], "white")
-    # grid[7][1] = Knight.new(self, [7, 1], "white")
-    # grid[7][2] = Bishop.new(self, [7, 2], "white")
-    # grid[7][3] = Queen.new(self, [7, 3], "white")
+    grid[7][0] = Rook.new(self, [7, 0], "white")
+    grid[7][1] = Knight.new(self, [7, 1], "white")
+    grid[7][2] = Bishop.new(self, [7, 2], "white")
+    grid[7][3] = Queen.new(self, [7, 3], "white")
     grid[7][4] = King.new(self, [7, 4], "white")
-    # grid[7][5] = Bishop.new(self, [7, 5], "white")
-    # grid[7][6] = Knight.new(self, [7, 6], "white")
-    # grid[7][7] = Rook.new(self, [7, 7], "white")
+    grid[7][5] = Bishop.new(self, [7, 5], "white")
+    grid[7][6] = Knight.new(self, [7, 6], "white")
+    grid[7][7] = Rook.new(self, [7, 7], "white")
 
-    grid[3][4] = Rook.new(self, [3, 4], "black")
+
+# grid[5][4] = King.new(self, [5, 4], "white")
+#     grid[4][4] = Rook.new(self, [4, 4], "black")
+#     grid[5][5] = Rook.new(self, [5,5], "black")
+#     grid[5][3] = Rook.new(self, [5,3], "black")
+#     grid[6][4] = Rook.new(self, [6, 4], "black")
+
+    # grid[4][4] = Rook.new(self, [4, 4], "black")
+    # grid[5][5] = Rook.new(self, [5,5], "black")
+    # grid[5][3] = Rook.new(self, [5,3], "black")
+    # grid[6][4] = Rook.new(self, [6, 4], "black")
+
 
     # grid[2][5] = Knight.new(self, [2, 5], "white")
 
@@ -202,7 +226,12 @@ board = Board.new
 # p board.grid[6][1].valid_moves
 # p board.grid[6][4].move_into_check?([5, 3])
 # p board.move([6,4], [5,4])
-p board.checkmate?("black")
-board.render
+# p board.in_check?("white")
+p board.render
+p "IN CHECKMATE "
+p board.checkmate?("white")
+# board.render
+
+
 # board.dup
 # board.rook.move_dirs
