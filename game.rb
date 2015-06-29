@@ -20,7 +20,7 @@ class Game
       i += 1
     end
 
-    if @board.checkmate("white")
+    if @board.checkmate?("white")
       puts "#{@player2.name}, you win!"
     else
       puts "#{@player1.name}, you win!"
@@ -37,7 +37,7 @@ class HumanPlayer
   end
 
   def play_turn(board)
-    begin
+    # begin
       puts "#{@name}, what would you like to move?"
       response_start = gets.chomp #A7
       puts "#{@name}, where would you like to move to?"
@@ -53,14 +53,14 @@ class HumanPlayer
         "G" => 6,
         "H" => 7
       }
-      start_second = convert[response_start[0]] # A
+      start_second = convert[response_start[0].upcase] # A
       start_first = 8 - response_start[1].to_i # 7
 
       start_pos = [start_first, start_second]
       p start_pos
 
 
-      end_second = convert[response_end[0]] # A
+      end_second = convert[response_end[0].upcase] # A
       end_first = 8 - response_end[1].to_i # 7
 
       end_pos = [end_first, end_second]
@@ -71,10 +71,10 @@ class HumanPlayer
       # start_pos = response[0]
       # end_pos = response[1]
       board.move(start_pos, end_pos)
-    rescue ArgumentError => e
-      puts e.message
-      retry
-    end
+    # rescue ArgumentError => e
+    #   puts e.message
+    #   retry
+    # end
 
   end
 end
