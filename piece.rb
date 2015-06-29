@@ -13,7 +13,8 @@ class Piece
 
   def move_into_check?(pos)
     duplicate_board = @board.dup
-    duplicate_board.move!(self.pos, pos)
+    duplicate_board.move!(self.pos, pos) # make sure to use move!
+    # the problem with move is that the line "!starting_piece.valid_moves.include?(end_pos)" calls valid_moves which calls move_in_check? this is a circular loop
 
     duplicate_board.in_check?(@color)
   end
@@ -22,14 +23,9 @@ class Piece
   end
 
   def valid_moves
-    moves.reject { |to_pos| move_into_check?(to_pos) }
-    # self.move_into_check?([5, 2])
-  #   self.moves.each do |move|
-  #    p move
-  #  end
-    # self.moves.reject do |move|
-    #   self.move_into_check?(move)
-    # end
+    self.moves.reject do |move|
+      self.move_into_check?(move)
+    end
   end
 
   def add_positions(delta)
