@@ -19,9 +19,13 @@ class Game
     end
 
     if @board.checkmate?("white")
-      puts "#{@player1.color.capitalize} is checkmated, #{@player2.color.capitalize}, you win!".colorize(:light_magenta)
+      puts ""
+      puts "#{@player1.color.capitalize} is checkmated, #{@player2.color.capitalize}, you win!".center(62).colorize(:cyan)
+      puts ""
     else
-      puts "#{@player2.color.capitalize} is checkmated, #{@player1.color.capitalize}, you win!".colorize(:light_magenta)
+      puts ""
+      puts "#{@player2.color.capitalize} is checkmated, #{@player1.color.capitalize}, you win!".center(62).colorize(:light_magenta)
+      puts ""
     end
   end
 
