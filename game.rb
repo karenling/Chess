@@ -70,9 +70,13 @@ class HumanPlayer
       response_start = nil
       selected_piece = nil
       until response_start
-          puts error.colorize(:red) if error
-          puts "Current player: #{@color}".colorize(board.cursor_color)
-          puts "Use a-w-s-d to select a position to start at, then press enter.".colorize(board.cursor_color)
+          if error
+            puts ""
+            puts error.center(62).colorize(:red)
+          end
+          puts ""
+          puts "Current player: #{@color}".center(62).colorize(board.cursor_color)
+          puts "Use a/w/s/d to select a chess piece, then press enter.".center(62).colorize(board.cursor_color)
           input = $stdin.getch
           case input
           when "q"
@@ -110,10 +114,10 @@ class HumanPlayer
       error = nil
       response_end = nil
       until response_end
-        puts error.colorize(:red) if error
-        puts "Current player: #{@color}".colorize(board.cursor_color)
-        puts "You've selected one of your #{selected_piece.class}(s).".colorize(board.cursor_color)
-        puts "Use a-w-s-d to select a position to end at, then press enter.".colorize(board.cursor_color)
+        puts error.center(62).colorize(:red) if error
+        puts "Current player: #{@color}".center(62).colorize(board.cursor_color)
+        puts "You've selected one of your #{selected_piece.class}(s).".center(62).colorize(board.cursor_color)
+        puts "Use a/w/s/d to select ending position, then press enter.".center(62).colorize(board.cursor_color)
         input = $stdin.getch
         case input
         when "q"

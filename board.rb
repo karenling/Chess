@@ -211,7 +211,9 @@ class Board
 
   def render
     system 'clear'
-    puts "Chess! Press 'q' to quit.".colorize(:yellow)
+    puts ""
+    puts "Chess! Press 'q' to quit.".center(62).colorize(color: :yellow)
+    puts ""
     counter = 0
     i = 8
     @grid.each_with_index do |row, row_idx|
