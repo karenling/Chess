@@ -118,7 +118,11 @@ class HumanPlayer
       error = nil
       response_end = nil
       until response_end
-        puts error.center(62).colorize(:red) if error
+        if error
+          puts ""
+          puts error.center(62).colorize(:red)
+        end
+        puts ""
         puts "Current player: #{@color}".center(62).colorize(board.cursor_color)
         puts "You've selected one of your #{selected_piece.class}(s).".center(62).colorize(board.cursor_color)
         puts "Use a/w/s/d to select ending position, then press enter.".center(62).colorize(board.cursor_color)
