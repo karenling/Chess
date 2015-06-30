@@ -5,12 +5,11 @@ class SteppingPiece < Piece
 
     self.move_dirs.each do |dir|
       new_position = self.add_positions(dir)
-      if (new_position[0] < 8 && new_position[1] < 8 && new_position[0] >= 0 && new_position[1] >= 0)
+      if within_board_boundaries(new_position)
         grid_piece = self.board.grid[new_position[0]][new_position[1]]
-
-        if !grid_piece.nil? && grid_piece.color == self.color
+        if grid_piece && self.same_color?(grid_piece)
           next
-        elsif !grid_piece.nil? && grid_piece.color != self.color
+        elsif grid_piece && !self.same_color?(grid_piece)
           available_moves << new_position
         else
           available_moves << new_position

@@ -105,7 +105,8 @@ class Board
           type = piece.class
           color = piece.color
           position = piece.pos
-          duplicate_board.grid[position[0]][position[1]] = type.new(duplicate_board, position, color)
+          duplicate_board.grid[position[0]][position[1]] =
+            type.new(duplicate_board, position, color)
         end
       end
     end
@@ -114,38 +115,27 @@ class Board
   end
 
   def setup_grid
-
     grid = Array.new(8) { Array.new(8) }
 
-    grid[0][0] = Rook.new(self, [0, 0], "black")
-    grid[0][1] = Knight.new(self, [0, 1], "black")
-    grid[0][2] = Bishop.new(self, [0, 2], "black")
-    grid[0][3] = Queen.new(self, [0, 3], "black")
-    grid[0][4] = King.new(self, [0, 4], "black")
-    grid[0][5] = Bishop.new(self, [0, 5], "black")
-    grid[0][6] = Knight.new(self, [0, 6], "black")
-    grid[0][7] = Rook.new(self, [0, 7], "black")
+    [0, 7].each do |row|
+      color = ( row == 0 ? "black" : "white" )
 
-    #
-    grid[7][0] = Rook.new(self, [7, 0], "white")
-    grid[7][1] = Knight.new(self, [7, 1], "white")
-    grid[7][2] = Bishop.new(self, [7, 2], "white")
-    grid[7][3] = Queen.new(self, [7, 3], "white")
-    grid[7][4] = King.new(self, [7, 4], "white")
-    grid[7][5] = Bishop.new(self, [7, 5], "white")
-    grid[7][6] = Knight.new(self, [7, 6], "white")
-    grid[7][7] = Rook.new(self, [7, 7], "white")
+      grid[row][0] = Rook.new(self, [row, 0], color)
+      grid[row][1] = Knight.new(self, [row, 1], color)
+      grid[row][2] = Bishop.new(self, [row, 2], color)
+      grid[row][3] = Queen.new(self, [row, 3], color)
+      grid[row][4] = King.new(self, [row, 4], color)
+      grid[row][5] = Bishop.new(self, [row, 5], color)
+      grid[row][6] = Knight.new(self, [row, 6], color)
+      grid[row][7] = Rook.new(self, [row, 7], color)
+    end
 
     pawn_rows = [1, 6]
     pawn_cols = (0..7).to_a
 
     pawn_rows.each do |row|
       pawn_cols.each do |col|
-        color = "black"
-        if row == 6
-          color = "white"
-        end
-
+        color = (row == 6 ? "white" : "black")
         grid[row][col] = Pawn.new(self, [row, col], color)
       end
     end
@@ -178,14 +168,27 @@ class Board
         end
 
         if item
-          stringed_row_top += "".center(7).colorize(:background => background)
-          stringed_row_bottom += "".center(7).colorize(:background => background)
-          stringed_row += "#{item.render}".center(7).colorize(:color => item.color.to_sym, :background => background)
+          stringed_row_top += "".center(7).colorize(
+            :background => background
+          )
+          stringed_row_bottom += "".center(7).colorize(
+            :background => background
+          )
+          stringed_row += "#{item.render}".center(7).colorize(
+            :color => item.color.to_sym,
+            :background => background
+          )
 
         else
-          stringed_row_top += "".center(7).colorize(:background => background)
-          stringed_row_bottom += "".center(7).colorize(:background => background)
-          stringed_row += "".center(7).colorize(:background => background)
+          stringed_row_top += "".center(7).colorize(
+            :background => background
+          )
+          stringed_row_bottom += "".center(7).colorize(
+            :background => background
+          )
+          stringed_row += "".center(7).colorize(
+            :background => background
+          )
         end
       end
       puts stringed_row_top
@@ -193,12 +196,8 @@ class Board
       puts stringed_row_bottom
       counter+=1
     end
-        puts "     A      B      C      D      E      F      G      H"
+    puts "     A      B      C      D      E      F      G      H"
     return nil
-  end
-
-  def test
-    p "testing"
   end
 
 end

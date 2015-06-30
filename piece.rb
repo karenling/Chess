@@ -38,8 +38,16 @@ class Piece
     end
   end
 
+  def within_board_boundaries(new_position)
+    new_position[0] < 8 && new_position[1] < 8 && new_position[0] >= 0 && new_position[1] >= 0
+  end
+
   def add_positions(delta)
     [@pos[0] + delta[0], @pos[1] + delta[1]]
+  end
+
+  def same_color?(other_piece)
+    self.color == other_piece.color
   end
 
 end

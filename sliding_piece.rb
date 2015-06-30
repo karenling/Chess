@@ -9,13 +9,11 @@ class SlidingPiece < Piece
       new_position = self.add_positions(dir)
 
       i = 1
-      while (new_position[0] < 8 && new_position[1] < 8 && new_position[0] >= 0 && new_position[1] >= 0) do
-
+      while within_board_boundaries(new_position) do
         grid_piece = self.board.grid[new_position[0]][new_position[1]]
-
-        if !grid_piece.nil? && grid_piece.color == self.color
+        if grid_piece && self.same_color?(grid_piece)
           break
-        elsif !grid_piece.nil? && grid_piece.color != self.color
+        elsif grid_piece && !self.same_color?(grid_piece)
           available_moves << new_position
           break
         elsif grid_piece.nil?
@@ -26,7 +24,6 @@ class SlidingPiece < Piece
         i+=1
       end
     end
-
 
     available_moves.uniq!
   end

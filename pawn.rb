@@ -17,11 +17,11 @@ class Pawn < Piece
       end
 
       i = 1
-      while (i <= end_i && new_position[0] < 8 && new_position[1] < 8 && new_position[0] >= 0 && new_position[1] >= 0) do
+      while i <= end_i && within_board_boundaries(new_position) do
         grid_piece = self.board.grid[new_position[0]][new_position[1]]
-        if !grid_piece.nil? && grid_piece.color == self.color
+        if grid_piece && self.same_color?(grid_piece)
           break
-        elsif !grid_piece.nil? && grid_piece.color != self.color
+        elsif grid_piece && !self.same_color?(grid_piece)
           available_moves << new_position
           break
         else
@@ -39,10 +39,10 @@ class Pawn < Piece
   def move_dirs
     final = []
 
-      if self.color === "black"
-        final << VERTICAL_DIRS[1] << DIAGONAL_DIRS[2] << DIAGONAL_DIRS[3]
-      else
-        final << VERTICAL_DIRS[0] << DIAGONAL_DIRS[0] << DIAGONAL_DIRS[1]
-      end
+    if self.color === "black"
+      final << VERTICAL_DIRS[1] << DIAGONAL_DIRS[2] << DIAGONAL_DIRS[3]
+    else
+      final << VERTICAL_DIRS[0] << DIAGONAL_DIRS[0] << DIAGONAL_DIRS[1]
+    end
   end
 end
