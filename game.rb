@@ -81,7 +81,9 @@ class HumanPlayer
               board.selected = [board.selected[0], board.selected[1] + 1]
             end
           when "\r"
-            if board.grid[board.selected[0]][board.selected[1]].color != @color
+            if board.grid[board.selected[0]][board.selected[1]].nil?
+              error = "Please select a piece."
+            elsif board.grid[board.selected[0]][board.selected[1]].color != @color
               error = "Not your color!"
             else
               response_start = board.selected

@@ -74,7 +74,6 @@ class Board
     @grid[end_pos[0]][end_pos[1]] = starting_piece
     @grid[end_pos[0]][end_pos[1]].pos = end_pos
     @grid[start[0]][start[1]] = nil
-
   end
 
 
