@@ -72,7 +72,7 @@ class HumanPlayer
       until response_start
           puts error.colorize(:red) if error
           puts "Current player: #{@color}".colorize(board.cursor_color)
-          puts "Use awsd to select a position to start at, then press enter.".colorize(board.cursor_color)
+          puts "Use a-w-s-d to select a position to start at, then press enter.".colorize(board.cursor_color)
           input = $stdin.getch
           case input
           when "q"
@@ -113,7 +113,7 @@ class HumanPlayer
         puts error.colorize(:red) if error
         puts "Current player: #{@color}".colorize(board.cursor_color)
         puts "You've selected one of your #{selected_piece.class}(s).".colorize(board.cursor_color)
-        puts "Use awsd to select a position to end at, then press enter.".colorize(board.cursor_color)
+        puts "Use a-w-s-d to select a position to end at, then press enter.".colorize(board.cursor_color)
         input = $stdin.getch
         case input
         when "q"
