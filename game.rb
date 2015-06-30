@@ -1,7 +1,9 @@
 require_relative 'board'
 require 'io/console'
+
 class Game
   attr_reader :board
+
   def initialize
     @board = Board.new
     @player1 = HumanPlayer.new("white")
@@ -9,7 +11,6 @@ class Game
   end
 
   def play
-    # @board.render
     puts "Lets play! Positions should be entered e.g. 'A7'".colorize(:green)
     i = 0
     while !@board.checkmate?("white") && !@board.checkmate?("black")
@@ -28,7 +29,6 @@ class Game
       puts ""
     end
   end
-
 end
 
 class HumanPlayer
@@ -49,27 +49,6 @@ class HumanPlayer
     board.render
 
     begin
-
-
-      # puts "From where:"
-      # response_start = gets.chomp #A7
-      # puts "To where:"
-      # response_end = gets.chomp # A5
-      #
-      # convert = {
-      #   "A" => 0,
-      #   "B" => 1,
-      #   "C" => 2,
-      #   "D" => 3,
-      #   "E" => 4,
-      #   "F" => 5,
-      #   "G" => 6,
-      #   "H" => 7
-      # }
-
-
-
-
       error = nil
       response_start = nil
       selected_piece = nil
@@ -109,11 +88,9 @@ class HumanPlayer
               selected_piece = board.grid[board.selected[0]][board.selected[1]]
             end
           end
+
           board.render
-
       end
-
-
 
       error = nil
       response_end = nil
@@ -144,26 +121,6 @@ class HumanPlayer
         board.render
       end
 
-
-
-
-      p response_start
-      p response_end
-
-      # start_second = convert[response_start[0].upcase] # A
-      # start_first = 8 - response_start[1].to_i # 7
-      #
-      # start_pos = [start_first, start_second]
-      # p start_pos
-      #
-      #
-      # end_second = convert[response_end[0].upcase] # A
-      # end_first = 8 - response_end[1].to_i # 7
-      #
-      # end_pos = [end_first, end_second]
-      # p end_pos
-
-
       board.move(response_start, response_end)
 
       board.render
@@ -174,7 +131,6 @@ class HumanPlayer
 
   end
 end
-
 
 game = Game.new
 game.play

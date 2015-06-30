@@ -5,17 +5,14 @@ class SteppingPiece < Piece
   HORIZONTAL_DIRS = [
     [0, -1], [0, 1]
   ]
-
   VERTICAL_DIRS = [
     [-1, 0], [1, 0]
   ]
-
 
   def moves
     available_moves = []
 
     self.move_dirs.each do |dir|
-      # p dir
       new_position = self.add_positions(dir)
       if (new_position[0] < 8 && new_position[1] < 8 && new_position[0] >= 0 && new_position[1] >= 0)
         grid_piece = self.board.grid[new_position[0]][new_position[1]]

@@ -17,24 +17,9 @@ class Board
     @grid = setup_grid
     @selected = [7, 0]
     @cursor_color = nil
-
-    # @pawn = Pawn.new([0, 0])
-    # add_piece(@pawn)
-  # p  @pawn.moves
-    # @piece = Piece.new
-    # @slidingpiece = SlidingPiece.new
-    # @rook = Rook.new
-    # @slidingpiece = SlidingPiece.new
-    # @rook = Rook.new
   end
 
   def in_check?(color)
-    # returns whether a player is in check
-    # You can implement this by (1) finding the position of the king on the board then (2) seeing if any of the opposing pieces can move to that position.
-
-    #find the king
-
-    # get all opposing pieces
     king = nil
     pieces = []
      @grid.each do |row|
@@ -61,7 +46,7 @@ class Board
     return false
   end
 
-  def checkmate?(color) #color = white. white is in checkmate if it has no other moves
+  def checkmate?(color)
     return if !self.in_check?(color)
 
     pieces = []
@@ -81,8 +66,6 @@ class Board
     end
 
     return false
-    # return true
-
   end
 
   def move!(start, end_pos)
@@ -96,15 +79,8 @@ class Board
 
 
   def move(start, end_pos)
-    # updates the 2d grid and also the moved piece's position. You'll want to raise an exception if: (a) there is no piece at start or (b) the piece cannot move to end_pos.
     starting_piece = @grid[start[0]][start[1]]
 
-    # if starting_piece.move_into_check?(end_pos)
-
-    # starting_piece.valid_moves
-
-    p starting_piece
-    p starting_piece.moves
     if starting_piece.nil?
       raise ArgumentError, "Not a valid selection"
       return
@@ -114,13 +90,11 @@ class Board
       raise ArgumentError, "Not a valid move."
       return
     elsif !starting_piece.valid_moves.include?(end_pos)
-      # p "here"
       raise "Cannot move into check"
       return
     else
       move!(start, end_pos)
     end
-
   end
 
   def dup
@@ -133,7 +107,6 @@ class Board
           color = piece.color
           position = piece.pos
           duplicate_board.grid[position[0]][position[1]] = type.new(duplicate_board, position, color)
-          # p duplicate_board.grid[position[0]][position[1]]
         end
       end
     end
@@ -144,7 +117,6 @@ class Board
   def setup_grid
 
     grid = Array.new(8) { Array.new(8) }
-
 
     grid[0][0] = Rook.new(self, [0, 0], "black")
     grid[0][1] = Knight.new(self, [0, 1], "black")
@@ -165,26 +137,6 @@ class Board
     grid[7][6] = Knight.new(self, [7, 6], "white")
     grid[7][7] = Rook.new(self, [7, 7], "white")
 
-
-# grid[5][4] = King.new(self, [5, 4], "white")
-#     grid[4][4] = Rook.new(self, [4, 4], "black")
-#     grid[5][5] = Rook.new(self, [5,5], "black")
-#     grid[5][3] = Rook.new(self, [5,3], "black")
-#     grid[6][4] = Rook.new(self, [6, 4], "black")
-
-    # grid[4][4] = Rook.new(self, [4, 4], "black")
-    # grid[5][5] = Rook.new(self, [5,5], "black")
-    # grid[5][3] = Rook.new(self, [5,3], "black")
-    # grid[6][4] = Rook.new(self, [6, 4], "black")
-
-
-    # grid[2][5] = Knight.new(self, [2, 5], "white")
-
-    # grid[2][6] = Rook.new(self, [2, 6], "black")
-
-# grid[5][5] = Bishop.new(self, [5, 5], "white")
-
-
     pawn_rows = [1, 6]
     pawn_cols = (0..7).to_a
 
@@ -196,7 +148,6 @@ class Board
         end
 
         grid[row][col] = Pawn.new(self, [row, col], color)
-        # p grid[row][col].moves
       end
     end
 
@@ -206,8 +157,6 @@ class Board
   def add_piece(piece)
     @grid[piece.pos[0]][piece.pos[1]] = piece
   end
-
-
 
   def render
     system 'clear'
@@ -254,19 +203,3 @@ class Board
   end
 
 end
-
-
-# board = Board.new
-# p board.in_check?("black")
-# p board.grid[6][1].valid_moves
-# p board.grid[6][4].move_into_check?([5, 3])
-# p board.move([6,4], [5,4])
-# p board.in_check?("white")
-# board.render
-# p "IN CHECKMATE "
-# p board.checkmate?("white")
-# board.render
-
-
-# board.dup
-# board.rook.move_dirs

@@ -1,7 +1,7 @@
 class Queen < SlidingPiece
 
   def symbols
-    {white: '♕', black: '♛'}
+    { white: '♕', black: '♛' }
   end
 
   def move_dirs
