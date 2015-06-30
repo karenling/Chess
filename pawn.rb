@@ -1,13 +1,5 @@
 class Pawn < Piece
 
-  DIAGONAL_DIRS = [
-    [-1, -1], [-1, 1], [1, -1], [1, 1],
-    [-2, -2], [-2, 2], [2, -2], [2, 2]
-  ]
-  VERTICAL_DIRS = [
-    [-1, 0], [1, 0], [-2, 0], [2, 0]
-  ]
-
   def symbols
     { white: '♙', black: '♟' }
   end
