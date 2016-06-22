@@ -2,7 +2,7 @@
 Terminal chess implementation, written in Ruby.
 
 <center>
-  <img src="https://dl.dropboxusercontent.com/u/2330299/capstone/chess.gif" width="50%">
+  <img src="https://dl.dropboxusercontent.com/u/2330299/all_photos.gif" width="50%">
 </center>
 
 ## Features
